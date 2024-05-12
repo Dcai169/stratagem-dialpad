@@ -1,0 +1,242 @@
+{
+    "\u2b07\u2b05\u2b07\u2b06\u2b95": {
+        "name": "MG-43 Machine Gun",
+        "icon": "MG-43icon.svg"
+    },
+    "\u2b07\u2b05\u2b95\u2b06\u2b07": {
+        "name": "APW-1 Anti-Materiel Rifle",
+        "icon": "APW-1icon.svg"
+    },
+    "\u2b07\u2b05\u2b07\u2b06\u2b06\u2b05": {
+        "name": "M-105 Stalwart",
+        "icon": "M-105icon.svg"
+    },
+    "\u2b07\u2b07\u2b05\u2b06\u2b95": {
+        "name": "EAT-17 Expendable Anti-Tank",
+        "icon": "EAT-17icon.svg"
+    },
+    "\u2b07\u2b05\u2b95\u2b95\u2b05": {
+        "name": "GR-8 Recoilless Rifle",
+        "icon": "GR-8icon.svg"
+    },
+    "\u2b07\u2b05\u2b06\u2b07\u2b06": {
+        "name": "FLAM-40 \"Incinerator\" Flamethrower",
+        "icon": "FLAM-40icon.svg"
+    },
+    "\u2b07\u2b05\u2b07\u2b06\u2b06\u2b95": {
+        "name": "AC-8 Autocannon",
+        "icon": "AC-8icon.svg"
+    },
+    "\u2b07\u2b95\u2b07\u2b06\u2b05\u2b95": {
+        "name": "RS-422 Railgun",
+        "icon": "RS-422icon.svg"
+    },
+    "\u2b07\u2b07\u2b06\u2b07\u2b07": {
+        "name": "FAF-14 Spear",
+        "icon": "FAF-14icon.svg"
+    },
+    "\u2b95\u2b07\u2b05\u2b06\u2b06": {
+        "name": "Orbital Gatling Barrage",
+        "icon": "OrbitalGatlingicon.svg"
+    },
+    "\u2b95\u2b95\u2b95": {
+        "name": "Orbital Airburst Strike",
+        "icon": "OrbitalAirbursticon.svg"
+    },
+    "\u2b95\u2b95\u2b07\u2b05\u2b95\u2b07": {
+        "name": "Orbital 120MM HE Barrage",
+        "icon": "Orbital120icon.svg"
+    },
+    "\u2b95\u2b07\u2b06\u2b06\u2b05\u2b07\u2b07": {
+        "name": "Orbital 380MM HE Barrage",
+        "icon": "Orbital380icon.svg"
+    },
+    "\u2b95\u2b07\u2b95\u2b07\u2b95\u2b07": {
+        "name": "Orbital Walking Barrage",
+        "icon": "OrbitalWalkingicon.svg"
+    },
+    "\u2b95\u2b07\u2b06\u2b95\u2b07": {
+        "name": "Orbital Laser",
+        "icon": "OrbitalLasericon.svg"
+    },
+    "\u2b95\u2b06\u2b07\u2b07\u2b95": {
+        "name": "Orbital Railcannon Strike",
+        "icon": "OrbitalRailcannonicon.svg"
+    },
+    "\u2b06\u2b95\u2b95": {
+        "name": "Eagle Strafing Run",
+        "icon": "EagleStrafingicon.svg"
+    },
+    "\u2b06\u2b95\u2b07\u2b95": {
+        "name": "Eagle Airstrike",
+        "icon": "EagleAirstrikeicon.svg"
+    },
+    "\u2b06\u2b95\u2b07\u2b07\u2b95": {
+        "name": "Eagle Cluster Bomb",
+        "icon": "EagleClusterbombicon.svg"
+    },
+    "\u2b06\u2b95\u2b07\u2b06": {
+        "name": "Eagle Napalm Airstrike",
+        "icon": "EagleNapalmicon.svg"
+    },
+    "\u2b07\u2b06\u2b06\u2b07\u2b06": {
+        "name": "LIFT-850 Jump Pack",
+        "icon": "LIFT-850icon.svg"
+    },
+    "\u2b06\u2b95\u2b06\u2b07": {
+        "name": "Eagle Smoke Strike",
+        "icon": "EagleSmokeicon.svg"
+    },
+    "\u2b06\u2b95\u2b06\u2b05": {
+        "name": "Eagle 110MM Rocket Pods",
+        "icon": "EagleRocketpodicon.svg"
+    },
+    "\u2b06\u2b95\u2b07\u2b07\u2b07": {
+        "name": "Eagle 500KG Bomb",
+        "icon": "Eagle500icon.svg"
+    },
+    "\u2b06\u2b06\u2b05\u2b06\u2b95": {
+        "name": "Eagle Rearm",
+        "icon": "HD2_Eagle_Rearm_Icon.svg"
+    },
+    "\u2b95\u2b95\u2b06": {
+        "name": "Orbital Precision Strike",
+        "icon": "OrbitalPrecisionicon.svg"
+    },
+    "\u2b95\u2b95\u2b07\u2b95": {
+        "name": "Orbital Gas Strike",
+        "icon": "OrbitalGasicon.svg"
+    },
+    "\u2b95\u2b95\u2b05\u2b07": {
+        "name": "Orbital EMS Strike",
+        "icon": "OrbitalEMSicon.svg"
+    },
+    "\u2b95\u2b95\u2b07\u2b06": {
+        "name": "Orbital Smoke Strike",
+        "icon": "OrbitalSmokeicon.svg"
+    },
+    "\u2b07\u2b06\u2b05\u2b95\u2b95\u2b05": {
+        "name": "HMG Emplacement",
+        "icon": "HMGTurreticon.svg"
+    },
+    "\u2b07\u2b07\u2b05\u2b95\u2b05\u2b95": {
+        "name": "Shield Generator Relay",
+        "icon": "Shieldrelayicon.svg"
+    },
+    "\u2b07\u2b06\u2b95\u2b06\u2b05\u2b95": {
+        "name": "Tesla Tower",
+        "icon": "Teslaicon.svg"
+    },
+    "\u2b07\u2b05\u2b06\u2b95": {
+        "name": "Anti-Personnel Minefield",
+        "icon": "Minefieldicon.svg"
+    },
+    "\u2b07\u2b05\u2b07\u2b06\u2b06\u2b07": {
+        "name": "B-1 Supply Pack",
+        "icon": "B-1icon.svg"
+    },
+    "\u2b07\u2b05\u2b06\u2b05\u2b07": {
+        "name": "GL-21 Grenade Launcher",
+        "icon": "GL-21icon.svg"
+    },
+    "\u2b07\u2b05\u2b07\u2b06\u2b05": {
+        "name": "LAS-98 Laser Cannon",
+        "icon": "LAS-98icon.svg"
+    },
+    "\u2b07\u2b05\u2b05\u2b07": {
+        "name": "Incendiary Mines",
+        "icon": "Fireminefieldicon.svg"
+    },
+    "\u2b07\u2b06\u2b05\u2b06\u2b95\u2b95": {
+        "name": "AX/LAS-5 \"Guard Dog\" Rover",
+        "icon": "AX-LAS-5icon.svg"
+    },
+    "\u2b07\u2b05\u2b07\u2b07\u2b06\u2b05": {
+        "name": "SH-20 Ballistic Shield Backpack",
+        "icon": "SH-20icon.svg"
+    },
+    "\u2b07\u2b95\u2b07\u2b06\u2b05\u2b05": {
+        "name": "ARC-3 Arc Thrower",
+        "icon": "ARC-3icon.svg"
+    },
+    "\u2b07\u2b07\u2b06\u2b05\u2b95": {
+        "name": "LAS-99 Quasar Cannon",
+        "icon": "LAS-99icon.svg"
+    },
+    "\u2b07\u2b06\u2b05\u2b95\u2b05\u2b95": {
+        "name": "SH-32 Shield Generator Pack",
+        "icon": "SH-32icon.svg"
+    },
+    "\u2b07\u2b06\u2b95\u2b95\u2b06": {
+        "name": "Machine Gun Sentry",
+        "icon": "MGsentryicon.svg"
+    },
+    "\u2b07\u2b06\u2b95\u2b05": {
+        "name": "Gatling Sentry",
+        "icon": "Gatlingsentryicon.svg"
+    },
+    "\u2b07\u2b06\u2b95\u2b95\u2b07": {
+        "name": "Mortar Sentry",
+        "icon": "Mortarsentryicon.svg"
+    },
+    "\u2b07\u2b06\u2b05\u2b06\u2b95\u2b07": {
+        "name": "AD-334 Guard Dog",
+        "icon": "AX-AR-23icon.svg"
+    },
+    "\u2b07\u2b06\u2b95\u2b06\u2b05\u2b06": {
+        "name": "Autocannon Sentry",
+        "icon": "Autocannoasentryicon.svg"
+    },
+    "\u2b07\u2b06\u2b95\u2b95\u2b05": {
+        "name": "Rocket Sentry",
+        "icon": "Missilesentryicon.svg"
+    },
+    "\u2b07\u2b06\u2b95\u2b07\u2b95": {
+        "name": "EMS Mortar Sentry",
+        "icon": "EMSmortaricon.svg"
+    },
+    "\u2b05\u2b07\u2b95\u2b06\u2b05\u2b07\u2b07": {
+        "name": "EXO-45 Patriot Exosuit",
+        "icon": "PatriotIcon.svg"
+    },
+    "\u2b07\u2b07\u2b06\u2b95": {
+        "name": "Resupply",
+        "icon": "ResupplyIcon.svg"
+    },
+    "\u2b06\u2b07\u2b95\u2b05\u2b06": {
+        "name": "Reinforce",
+        "icon": "ReinforceIcon.svg"
+    },
+    "\u2b06\u2b07\u2b95\u2b06": {
+        "name": "SOS Beacon",
+        "icon": "SOSIcon.svg"
+    },
+    "\u2b07\u2b07\u2b06\u2b06\u2b06": {
+        "name": "Upload Data",
+        "icon": "UploadDataIcon.svg"
+    },
+    "\u2b07\u2b06\u2b05\u2b07\u2b06\u2b95\u2b07\u2b06": {
+        "name": "Hellbomb",
+        "icon": "Hellbomb.svg"
+    },
+    "\u2b95\u2b06\u2b06\u2b07": {
+        "name": "SEAF Artillery",
+        "icon": "Artillery.svg"
+    },
+    "\u2b06\u2b06\u2b05\u2b95\u2b07\u2b07": {
+        "name": "Seismic Probe",
+        "icon": "SeismicProbeIcon.svg"
+    },
+    "\u2b07\u2b07\u2b05\u2b95\u2b07\u2b07": {
+        "name": "Prospecting Drill",
+        "icon": "DrillingIcon.svg"
+    },
+    "\u2b95\u2b95\u2b05\u2b05": {
+        "name": "Orbital Illumination Flare",
+        "icon": "IlluminationFlare.svg"
+    },
+    "\u2b07\u2b06\u2b07\u2b06": {
+        "name": "Super Earth Flag",
+        "icon": "SuperEarthFlag.svg"
+    }
+}
