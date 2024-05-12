@@ -94,7 +94,7 @@ class App:
         display_mode = pygame.HWSURFACE | pygame.DOUBLEBUF
 
         if system() != "Windows":
-            display_mode |= pygame.FULLSCREEN
+            display_mode |= pygame.NOFRAME
 
         self.screen = pygame.display.set_mode(self.size, display_mode)
         # print(pygame.display.get_desktop_sizes())
@@ -138,9 +138,9 @@ class App:
                 self.icon_rect.center = (self.width // 2, 4*self.height // 6)
                 self.screen.blit(self.icon, self.icon_rect)
 
-                pygame.time.set_timer(0xd001, 1600, 1)
+                pygame.time.set_timer(0xd001, 1600, loops=1)
             elif self.stratagem is not None and self.stratagem == {}:
-                pygame.time.set_timer(0xd002, 200, 1)
+                pygame.time.set_timer(0xd002, 200, loops=1)
 
 
         elif event.type == 0xd001:
