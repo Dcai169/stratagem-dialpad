@@ -7,7 +7,7 @@ import io
 from os import getcwd
 from os.path import join as pathjoin
 import json
-
+from platform import system
 
 class Direction(Enum):
     NONE = ""
@@ -90,7 +90,13 @@ class App:
         pygame.init()
     
         self.size = self.width, self.height = 800, 480
-        self.screen = pygame.display.set_mode(self.size, pygame.HWSURFACE | pygame.DOUBLEBUF)
+
+        display_mode = pygame.HWSURFACE | pygame.DOUBLEBUF
+
+        if system() != "Windows":
+            display_mode |= pygame.FULLSCREEN
+
+        self.screen = pygame.display.set_mode(self.size, display_mode)
         # print(pygame.display.get_desktop_sizes())
 
         self._running = True
