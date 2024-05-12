@@ -9,6 +9,9 @@ from os.path import join as pathjoin
 import json
 from platform import system
 
+CLEARALLINFO = USEREVENT + 1
+CLEARSEQUENCE = USEREVENT + 2
+
 class Direction(Enum):
     NONE = ""
     LEFT = "\u2B05"
@@ -138,19 +141,19 @@ class App:
                 self.icon_rect.center = (self.width // 2, 4*self.height // 6)
                 self.screen.blit(self.icon, self.icon_rect)
 
-                pygame.time.set_timer(0xd001, 1600, loops=1)
+                pygame.time.set_timer(CLEARALLINFO, 1600, loops=1)
             elif self.stratagem is not None and self.stratagem == {}:
-                pygame.time.set_timer(0xd002, 200, loops=1)
+                pygame.time.set_timer(CLEARSEQUENCE, 200, loops=1)
 
 
-        elif event.type == 0xd001:
+        elif event.type == CLEARALLINFO:
             self.screen.fill((0, 0, 0), self.sequence_rect)
             self.screen.fill((0, 0, 0), self.stratagem_name_rect)
             self.screen.fill((0, 0, 0), self.icon_rect)
 
             self.composer.reset_sequence()
         
-        elif event.type == 0xd002:
+        elif event.type == CLEARSEQUENCE:
             self.screen.fill((0, 0, 0), self.sequence_rect)
 
             self.composer.reset_sequence()
