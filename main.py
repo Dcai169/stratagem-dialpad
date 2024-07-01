@@ -19,27 +19,39 @@ class Direction(Enum):
     DOWN = "\u2B07"
     RIGHT = "\u2B95"
 
+    def from_vector(stroke_vector: np.ndarray):
+        azimuth = round_base(np.rad2deg(np.arctan2(*stroke_vector)), 90)
+
+        if np.linalg.norm(stroke_vector) < 100:
+            return Direction.NONE
+
+        if azimuth == 180 or azimuth == -180:
+            return Direction.UP
+        elif azimuth == 90:
+            return Direction.RIGHT
+        elif azimuth == 0:
+            return Direction.DOWN
+        elif azimuth == -90:
+            return Direction.LEFT
+        else:
+            return Direction.NONE
+
+    def from_key(key: int):
+        if key in [pygame.K_LEFT, pygame.K_UP, pygame.K_DOWN, pygame.K_RIGHT]:
+            if key == pygame.K_LEFT:
+                return Direction.LEFT
+            elif key == pygame.K_UP:
+                return Direction.UP
+            elif key == pygame.K_DOWN:
+                return Direction.DOWN
+            elif key == pygame.K_RIGHT:
+                return Direction.RIGHT
+        else:
+            return Direction.NONE
+
 
 def round_base(x, base):
     return base * round(x/base)
-
-
-def get_vector_direction(stroke_vector: np.ndarray) -> Direction:
-    azimuth = round_base(np.rad2deg(np.arctan2(*stroke_vector)), 90)
-
-    if np.linalg.norm(stroke_vector) < 100:
-        return Direction.NONE
-
-    if azimuth == 180 or azimuth == -180:
-        return Direction.UP
-    elif azimuth == 90:
-        return Direction.RIGHT
-    elif azimuth == 0:
-        return Direction.DOWN
-    elif azimuth == -90:
-        return Direction.LEFT
-    else:
-        return Direction.NONE
     
 def load_svg(filename):
     return pygame.image.load(io.BytesIO(cairosvg.svg2png(url=filename, dpi=120, scale=2)))
@@ -88,9 +100,54 @@ class App:
         self.display_font = pygame.font.Font(pathjoin("assets", "fonts", "Monda-Regular.ttf.woff"), 60)
         self.inconsolata = pygame.font.Font(pathjoin("assets", "fonts", "Inconsolata", "static", "Inconsolata-Regular.ttf"), 72)
         
+    def update_sequence_display(self):
+        self.sequence = self.inconsolata.render(self.composer.get_current_sequence(), True, (255, 255, 255), (0, 0, 0))
+        self.sequence_rect = self.sequence.get_rect()
+        self.sequence_rect.center = (self.width // 2, self.height // 6)
+        self.screen.blit(self.sequence, self.sequence_rect)
+
+        pygame.mixer.music.load(pathjoin("assets", "sounds", "key-press.mp3"))
+
+        self.stratagem = self.composer.check_stratagems()
+        if self.stratagem is not None and self.stratagem != {}:
+            self.stratagem_name = self.display_font.render(self.stratagem['name'], True, (255, 255, 255), (0, 0, 0))
+            self.stratagem_name_rect = self.stratagem_name.get_rect()
+            self.stratagem_name_rect.center = (self.width // 2, 2*self.height // 6)
+            self.screen.blit(self.stratagem_name, self.stratagem_name_rect)
+
+            filepath = pathjoin(getcwd(), 'assets', 'stratagem_icons', self.stratagem['icon'])
+            self.icon = load_svg(filepath).convert(self.screen)
+            self.icon_rect = self.icon.get_rect()
+            self.icon_rect.center = (self.width // 2, 4*self.height // 6)
+            self.screen.blit(self.icon, self.icon_rect)
+
+            pygame.time.set_timer(CLEARALLINFO, 800, loops=1)
+        elif self.stratagem is not None and self.stratagem == {}:
+            # pygame.time.set_timer(CLEARSEQUENCE, 400, loops=1)
+            # pygame.time.wait(400)
+            self.on_event(pygame.event.Event(CLEARSEQUENCE))
+
+            pygame.mixer.music.load(pathjoin("assets", "sounds", "key-press-fail.mp3"))
+
+
+        pygame.mixer.music.play()
+
+    def input_start(self):
+        self.stroke_start = np.array(pygame.mouse.get_pos())
+        if self.stratagem is not None and self.stratagem != {}:
+            self.screen.fill((0, 0, 0), self.sequence_rect)
+            self.screen.fill((0, 0, 0), self.stratagem_name_rect)
+            self.screen.fill((0, 0, 0), self.icon_rect)
+        elif self.stratagem == {}:
+            self.screen.fill((0, 0, 0), self.sequence_rect)
+        
 
     def on_init(self):
+        pygame.mixer.pre_init(44100, -16, 2, 2048)
+
         pygame.init()
+
+        pygame.mixer.init()
     
         self.size = self.width, self.height = 800, 480
 
@@ -108,42 +165,30 @@ class App:
         if event.type == pygame.QUIT:
             self._running = False
 
+        elif event.type == pygame.KEYDOWN:
+            key_dir = Direction.from_key(event.key)
+
+            if key_dir is not Direction.NONE:
+                self.input_start()
+
+        elif event.type == pygame.KEYUP:
+            key_dir = Direction.from_key(event.key)
+
+            if key_dir is not Direction.NONE:
+                self.composer.append_stroke(key_dir)
+                self.update_sequence_display()
+            
+
         elif event.type == MOUSEBUTTONDOWN:
-            self.stroke_start = np.array(pygame.mouse.get_pos())
-            if self.stratagem is not None and self.stratagem != {}:
-                self.screen.fill((0, 0, 0), self.sequence_rect)
-                self.screen.fill((0, 0, 0), self.stratagem_name_rect)
-                self.screen.fill((0, 0, 0), self.icon_rect)
-            elif self.stratagem == {}:
-                self.screen.fill((0, 0, 0), self.sequence_rect)
+            self.input_start()
 
         elif event.type == MOUSEBUTTONUP:
             self.stroke_end = np.array(pygame.mouse.get_pos())
 
-            stroke_dir = get_vector_direction(np.subtract(self.stroke_end, self.stroke_start))
+            stroke_dir = Direction.from_vector(np.subtract(self.stroke_end, self.stroke_start))
             self.composer.append_stroke(stroke_dir)
 
-            self.sequence = self.inconsolata.render(self.composer.get_current_sequence(), True, (255, 255, 255), (0, 0, 0))
-            self.sequence_rect = self.sequence.get_rect()
-            self.sequence_rect.center = (self.width // 2, self.height // 6)
-            self.screen.blit(self.sequence, self.sequence_rect)
-
-            self.stratagem = self.composer.check_stratagems()
-            if self.stratagem is not None and self.stratagem != {}:
-                self.stratagem_name = self.display_font.render(self.stratagem['name'], True, (255, 255, 255), (0, 0, 0))
-                self.stratagem_name_rect = self.stratagem_name.get_rect()
-                self.stratagem_name_rect.center = (self.width // 2, 2*self.height // 6)
-                self.screen.blit(self.stratagem_name, self.stratagem_name_rect)
-
-                filepath = pathjoin(getcwd(), 'assets', 'stratagem_icons', self.stratagem['icon'])
-                self.icon = load_svg(filepath).convert(self.screen)
-                self.icon_rect = self.icon.get_rect()
-                self.icon_rect.center = (self.width // 2, 4*self.height // 6)
-                self.screen.blit(self.icon, self.icon_rect)
-
-                pygame.time.set_timer(CLEARALLINFO, 1600, loops=1)
-            elif self.stratagem is not None and self.stratagem == {}:
-                pygame.time.set_timer(CLEARSEQUENCE, 200, loops=1)
+            self.update_sequence_display()
 
         elif event.type == CLEARALLINFO:
             self.screen.fill((0, 0, 0), self.sequence_rect)
@@ -181,6 +226,6 @@ class App:
 
 
 if __name__ == "__main__":
-    theApp = App()
+    app = App()
     pygame.display.set_caption('Stratagem Hero')
-    theApp.on_execute()
+    app.on_execute()
