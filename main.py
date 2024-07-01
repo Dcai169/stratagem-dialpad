@@ -21,8 +21,12 @@ class Direction(Enum):
 
     def from_vector(stroke_vector: np.ndarray):
         azimuth = round_base(np.rad2deg(np.arctan2(*stroke_vector)), 90)
+        length = np.linalg.norm(stroke_vector)
 
-        if np.linalg.norm(stroke_vector) < 100:
+
+        print(round(length), azimuth)
+
+        if length < 50:
             return Direction.NONE
 
         if azimuth == 180 or azimuth == -180:
@@ -68,8 +72,7 @@ class Composer:
         self.sequence = []
 
     def append_stroke(self, stroke: Direction) -> None:
-        if stroke != Direction.NONE:
-            self.sequence.append(stroke)
+        self.sequence.append(stroke)
 
     def check_stratagems(self):
         possible_codes = [s for s in self.stratagems.keys() if self.get_current_sequence() in s[0:len(self.sequence)]]
@@ -166,6 +169,9 @@ class App:
             self._running = False
 
         elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_c and event.mod & pygame.KMOD_CTRL:
+                raise KeyboardInterrupt()
+
             key_dir = Direction.from_key(event.key)
 
             if key_dir is not Direction.NONE:
@@ -186,9 +192,10 @@ class App:
             self.stroke_end = np.array(pygame.mouse.get_pos())
 
             stroke_dir = Direction.from_vector(np.subtract(self.stroke_end, self.stroke_start))
-            self.composer.append_stroke(stroke_dir)
 
-            self.update_sequence_display()
+            if stroke_dir is not Direction.NONE:
+                self.composer.append_stroke(stroke_dir)
+                self.update_sequence_display()
 
         elif event.type == CLEARALLINFO:
             self.screen.fill((0, 0, 0), self.sequence_rect)
