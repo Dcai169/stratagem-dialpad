@@ -135,7 +135,7 @@ class App:
             self.icon_rect.center = (self.width // 2, 4*self.height // 6)
             self.screen.blit(self.icon, self.icon_rect)
 
-            pygame.time.set_timer(CLEARALLINFO, 800, loops=1)
+            pygame.time.set_timer(CLEARALLINFO, 1000, loops=1)
         elif self.stratagem is not None and self.stratagem == {}:
             # pygame.time.set_timer(CLEARSEQUENCE, 400, loops=1)
             # pygame.time.wait(400)
