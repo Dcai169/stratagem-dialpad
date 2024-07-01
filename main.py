@@ -170,7 +170,9 @@ class App:
             display_mode |= pygame.NOFRAME
 
         self.screen = pygame.display.set_mode(self.size, display_mode)
-        # print(pygame.display.get_desktop_sizes())
+        
+        pygame.mouse.set_visible(False)
+            
 
         self._running = True
 
