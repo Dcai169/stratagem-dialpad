@@ -25,8 +25,8 @@ class Direction(Enum):
         azimuth = round_base(np.rad2deg(np.arctan2(*stroke_vector)), 90)
         length = np.linalg.norm(stroke_vector)
 
-
-        print(round(length), azimuth)
+        if DEBUG > 1:
+            print(round(length), azimuth)
 
         if length < 60:
             return Direction.NONE
@@ -107,6 +107,13 @@ class App:
         self.display_font = pygame.font.Font(pathjoin("assets", "fonts", "Monda-Regular.ttf.woff"), 60)
         self.inconsolata = pygame.font.Font(pathjoin("assets", "fonts", "Inconsolata", "static", "Inconsolata-Regular.ttf"), 72)
         
+    def clear_debug_markers(self):
+        if self.start_marker is not None:
+            self.screen.fill(0, self.start_marker)
+
+        if self.end_marker is not None:
+            self.screen.fill(0, self.end_marker)
+    
     def update_sequence_display(self):
         self.sequence = self.inconsolata.render(self.composer.get_current_sequence(), True, (255, 255, 255), (0, 0, 0))
         self.sequence_rect = self.sequence.get_rect()
@@ -193,19 +200,15 @@ class App:
             self.clear_display()
 
             if DEBUG > 0:
-                if self.start_marker is not None:
-                    self.screen.fill(0, self.start_marker)
+                self.clear_debug_markers()
 
-                if self.end_marker is not None:
-                    self.screen.fill(0, self.end_marker)
-
-                self.start_marker = pygame.draw.circle(self.screen, (255, 0, 0), pygame.mouse.get_pos(), 5)
+                self.start_marker = pygame.draw.circle(self.screen, (255, 0, 0), pygame.mouse.get_pos(), 2)
 
         elif event.type == MOUSEBUTTONUP:
             self.stroke_end = np.array(pygame.mouse.get_pos())
 
             if DEBUG > 0:
-                self.end_marker = pygame.draw.circle(self.screen, (255, 0, 0), pygame.mouse.get_pos(), 5)
+                self.end_marker = pygame.draw.circle(self.screen, (255, 0, 0), pygame.mouse.get_pos(), 2)
 
             stroke_dir = Direction.from_vector(np.subtract(self.stroke_end, self.stroke_start))
 
@@ -214,16 +217,17 @@ class App:
                 self.update_sequence_display()
 
         elif event.type == CLEARALLINFO:
-            self.screen.fill(0, self.sequence_rect)
-            self.screen.fill(0, self.stratagem_name_rect)
-            self.screen.fill(0, self.icon_rect)
-
             self.composer.reset_sequence()
+            self.clear_display()
+            self.clear_debug_markers()
+
         
         elif event.type == CLEARSEQUENCE:
             self.screen.fill(0, self.sequence_rect)
 
             self.composer.reset_sequence()
+            self.clear_debug_markers()
+
 
     def on_loop(self):
         pass
