@@ -9,6 +9,8 @@ from os.path import join as pathjoin
 import json
 from platform import system
 
+DEBUG = 1
+
 CLEARALLINFO = USEREVENT + 1
 CLEARSEQUENCE = USEREVENT + 2
 
@@ -26,7 +28,7 @@ class Direction(Enum):
 
         print(round(length), azimuth)
 
-        if length < 50:
+        if length < 60:
             return Direction.NONE
 
         if azimuth == 180 or azimuth == -180:
@@ -98,6 +100,8 @@ class App:
         self._running = True
         self.screen = None
         self.stratagem = None
+        self.start_marker = None
+        self.end_marker = None
 
         pygame.font.init()
         self.display_font = pygame.font.Font(pathjoin("assets", "fonts", "Monda-Regular.ttf.woff"), 60)
@@ -137,11 +141,11 @@ class App:
 
     def clear_display(self):
         if self.stratagem is not None and self.stratagem != {}:
-            self.screen.fill((0, 0, 0), self.sequence_rect)
-            self.screen.fill((0, 0, 0), self.stratagem_name_rect)
-            self.screen.fill((0, 0, 0), self.icon_rect)
+            self.screen.fill(0, self.sequence_rect)
+            self.screen.fill(0, self.stratagem_name_rect)
+            self.screen.fill(0, self.icon_rect)
         elif self.stratagem == {}:
-            self.screen.fill((0, 0, 0), self.sequence_rect)
+            self.screen.fill(0, self.sequence_rect)
         
 
     def on_init(self):
@@ -188,8 +192,20 @@ class App:
             self.stroke_start = np.array(pygame.mouse.get_pos())
             self.clear_display()
 
+            if DEBUG > 0:
+                if self.start_marker is not None:
+                    self.screen.fill(0, self.start_marker)
+
+                if self.end_marker is not None:
+                    self.screen.fill(0, self.end_marker)
+
+                self.start_marker = pygame.draw.circle(self.screen, (255, 0, 0), pygame.mouse.get_pos(), 5)
+
         elif event.type == MOUSEBUTTONUP:
             self.stroke_end = np.array(pygame.mouse.get_pos())
+
+            if DEBUG > 0:
+                self.end_marker = pygame.draw.circle(self.screen, (255, 0, 0), pygame.mouse.get_pos(), 5)
 
             stroke_dir = Direction.from_vector(np.subtract(self.stroke_end, self.stroke_start))
 
@@ -198,14 +214,14 @@ class App:
                 self.update_sequence_display()
 
         elif event.type == CLEARALLINFO:
-            self.screen.fill((0, 0, 0), self.sequence_rect)
-            self.screen.fill((0, 0, 0), self.stratagem_name_rect)
-            self.screen.fill((0, 0, 0), self.icon_rect)
+            self.screen.fill(0, self.sequence_rect)
+            self.screen.fill(0, self.stratagem_name_rect)
+            self.screen.fill(0, self.icon_rect)
 
             self.composer.reset_sequence()
         
         elif event.type == CLEARSEQUENCE:
-            self.screen.fill((0, 0, 0), self.sequence_rect)
+            self.screen.fill(0, self.sequence_rect)
 
             self.composer.reset_sequence()
 
