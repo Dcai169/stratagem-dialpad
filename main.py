@@ -135,8 +135,7 @@ class App:
 
         pygame.mixer.music.play()
 
-    def input_start(self):
-        self.stroke_start = np.array(pygame.mouse.get_pos())
+    def clear_display(self):
         if self.stratagem is not None and self.stratagem != {}:
             self.screen.fill((0, 0, 0), self.sequence_rect)
             self.screen.fill((0, 0, 0), self.stratagem_name_rect)
@@ -175,7 +174,7 @@ class App:
             key_dir = Direction.from_key(event.key)
 
             if key_dir is not Direction.NONE:
-                self.input_start()
+                self.clear_display()
 
         elif event.type == pygame.KEYUP:
             key_dir = Direction.from_key(event.key)
@@ -186,7 +185,8 @@ class App:
             
 
         elif event.type == MOUSEBUTTONDOWN:
-            self.input_start()
+            self.stroke_start = np.array(pygame.mouse.get_pos())
+            self.clear_display()
 
         elif event.type == MOUSEBUTTONUP:
             self.stroke_end = np.array(pygame.mouse.get_pos())
