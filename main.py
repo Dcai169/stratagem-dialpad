@@ -124,6 +124,7 @@ class App:
 
         self.stratagem = self.composer.check_stratagems()
         if self.stratagem is not None and self.stratagem != {}:
+            self.clear_debug_markers()
             self.stratagem_name = self.display_font.render(self.stratagem['name'], True, (255, 255, 255), (0, 0, 0))
             self.stratagem_name_rect = self.stratagem_name.get_rect()
             self.stratagem_name_rect.center = (self.width // 2, 2*self.height // 6)
@@ -135,7 +136,7 @@ class App:
             self.icon_rect.center = (self.width // 2, 4*self.height // 6)
             self.screen.blit(self.icon, self.icon_rect)
 
-            pygame.time.set_timer(CLEARALLINFO, 2000, loops=1)
+            pygame.time.set_timer(CLEARALLINFO, 2500, loops=1)
         elif self.stratagem is not None and self.stratagem == {}:
             # pygame.time.set_timer(CLEARSEQUENCE, 400, loops=1)
             # pygame.time.wait(400)
